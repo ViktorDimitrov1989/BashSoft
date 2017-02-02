@@ -65,17 +65,14 @@ public class IOManager {
             changeCurrentDirAbsolute(currentPath);
         }
 
-
-
     }
 
-    private static void changeCurrentDirAbsolute(String absolutePath) {
+    public static void changeCurrentDirAbsolute(String absolutePath) {
         File file = new File(absolutePath);
         if(!file.exists()){
             OutputWriter.displayException(ExceptionMessages.INVALID_PATH);
             return;
         }
-
         SessionData.currentPath = absolutePath;
     }
 }

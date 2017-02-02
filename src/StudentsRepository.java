@@ -1,24 +1,34 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class StudentsRepository {
     public static boolean isDataInitialized = false;
     public static HashMap<String, HashMap<String, ArrayList<Integer>>> studentsByCourse;
 
-    public static void initializeData(){
+    public static void initializeData(String fileName){
         if(isDataInitialized){
             System.out.println(ExceptionMessages.DATA_ALREADY_INITIALIZED);
             return;
         }
 
         studentsByCourse = new HashMap<String, HashMap<String, ArrayList<Integer>>>();
-        readData();
+        try {
+            readData(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void readData() {
-        Scanner scan = new Scanner(System.in);
+    private static void readData(String fileName) throws IOException {
+        String paht = SessionData.currentPath + "\\" + fileName;
+        List<String> lines = Files.readAllLines(Paths.get(paht));
+
+        Scanner scan = new Scanner(System.in); //TODO??
         String input = scan.nextLine();
 
-        while (!input.equals("")){
+        for (String line: lines){
             String[] tokens = input.split("\\s+");
             String course = tokens[0];
             String student = tokens[1];
