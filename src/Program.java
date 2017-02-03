@@ -5,7 +5,9 @@ public class Program {
 
         //Tester.compareContent(path1,path2);
 
-        IOManager.createDirectoryInCurrentFolder("pesho");
+        //IOManager.createDirectoryInCurrentFolder("pesho");
+
+        InputReader.readCommands();
 
     }
 }
