@@ -35,10 +35,10 @@ public class CommandInterpreter {
                 }
                 break;
             case"filter":
-                //filterStudents();
+                tryPrintFilteredStudents(input,data);
                 break;
             case"order":
-                //orderCourse(courseName)
+                tryPrintOrderedStudents(input,data);
                 break;
             case"download":
                 //downloadFile(path);
@@ -186,5 +186,42 @@ public class CommandInterpreter {
     private static void displayInvalidCommandMessage(String input) {
         String output = String.format("The command '%s' is invalid", input);
         OutputWriter.writeMessageOnNewLine(output);
+    }
+
+    private static void tryPrintFilteredStudents(String input, String[] data){
+        if(data.length != 3 && data.length != 4){
+            displayInvalidCommandMessage(input);
+        }
+        String course = data[1];
+        String filter = data[2].toLowerCase();
+        if(data.length == 3){
+            StudentsRepository.printFilteredStudents(course,filter, null);
+            return;
+        }
+
+        Integer numberOfStudents = Integer.valueOf(data[3]);
+
+        if(data.length == 4){
+            StudentsRepository.printFilteredStudents(course,filter,numberOfStudents);
+        }
+    }
+
+    private static void tryPrintOrderedStudents(String input, String[] data){
+        if(data.length != 3 && data.length != 4){
+            displayInvalidCommandMessage(input);
+        }
+        String course = data[1];
+        String filter = data[2].toLowerCase();
+        if(data.length == 3){
+            RepositorySorters.printOrderedStudents(course, filter, null);
+            return;
+        }
+
+        Integer numberOfStudents = Integer.valueOf(data[3]);
+
+        if(data.length == 4){
+            RepositorySorters.printOrderedStudents(course, filter, numberOfStudents);
+        }
+
     }
 }

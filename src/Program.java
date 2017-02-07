@@ -8,6 +8,5 @@ public class Program {
         //IOManager.createDirectoryInCurrentFolder("pesho");
 
         InputReader.readCommands();
-
     }
 }

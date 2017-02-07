@@ -97,4 +97,16 @@ public class StudentsRepository {
             OutputWriter.printStudent(entry.getKey(), entry.getValue());
         }
     }
+
+    public static void printFilteredStudents(String course, String filter, Integer numberOfStudents){
+        if(!isQueryForCoursePossible(course)){
+            return;
+        }
+        if(numberOfStudents == null){
+            numberOfStudents = studentsByCourse.get(course).size();
+        }
+
+        RepositoryFilters.printFilteredStudents(studentsByCourse.get(course), filter, numberOfStudents);
+    }
+
 }
