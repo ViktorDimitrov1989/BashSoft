@@ -1,3 +1,9 @@
+package Repository;
+
+import IO.OutputWriter;
+import StaticData.ExceptionMessages;
+import StaticData.SessionData;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -105,7 +111,6 @@ public class StudentsRepository {
         if(numberOfStudents == null){
             numberOfStudents = studentsByCourse.get(course).size();
         }
-
         RepositoryFilters.printFilteredStudents(studentsByCourse.get(course), filter, numberOfStudents);
     }
 

@@ -1,4 +1,8 @@
+package IO;
+
+import StaticData.SessionData;
 import java.util.Scanner;
+
 
 public class InputReader {
     private static final String END_COMMAND = "quit";

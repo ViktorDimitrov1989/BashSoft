@@ -1,3 +1,12 @@
+package IO;
+
+import IO.IOManager;
+import IO.OutputWriter;
+import Judge.Tester;
+import Repository.RepositorySorters;
+import Repository.StudentsRepository;
+import StaticData.SessionData;
+
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
