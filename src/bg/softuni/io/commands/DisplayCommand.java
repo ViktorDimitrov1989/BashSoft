@@ -1,5 +1,7 @@
 package bg.softuni.io.commands;
 
+import bg.softuni.annotations.Alias;
+import bg.softuni.annotations.Inject;
 import bg.softuni.contracts.Course;
 import bg.softuni.contracts.SimpleOrderedBag;
 import bg.softuni.exceptions.InvalidInputException;
@@ -10,14 +12,18 @@ import bg.softuni.models.CourseImpl;
 import bg.softuni.models.StudentImpl;
 import bg.softuni.network.DownloadManager;
 import bg.softuni.repository.StudentsRepository;
+import com.sun.corba.se.spi.activation.Repository;
 
 import java.util.Comparator;
 
+@Alias("display")
 public class DisplayCommand extends Command {
 
-    public DisplayCommand(String input, String[] data, Tester tester, StudentsRepository repository,
-                          DownloadManager downloadManager, IOManager ioManager) {
-        super(input, data, tester, repository, downloadManager, ioManager);
+    @Inject
+    private StudentsRepository repository;
+
+    public DisplayCommand(String input, String[] data) {
+        super(input, data);
     }
 
     @Override
@@ -33,13 +39,13 @@ public class DisplayCommand extends Command {
         if(entityToDisplay.equalsIgnoreCase("students")){
             Comparator<StudentImpl> studentComparator = (Comparator<StudentImpl>) this.createComparator(sortType);
 
-            SimpleOrderedBag<StudentImpl> list = this.getRepository().getAllStudentsSorted(studentComparator);
+            SimpleOrderedBag<StudentImpl> list = this.repository.getAllStudentsSorted(studentComparator);
 
             OutputWriter.writeMessageOnNewLine(list.joiWith(System.lineSeparator()));
         }else if(entityToDisplay.equalsIgnoreCase("courses")){
             Comparator<CourseImpl> courseComparator = (Comparator<CourseImpl>) this.createComparator(sortType);
 
-            SimpleOrderedBag<CourseImpl> list = this.getRepository().getAllCoursesSorted(courseComparator);
+            SimpleOrderedBag<CourseImpl> list = this.repository.getAllCoursesSorted(courseComparator);
 
             OutputWriter.writeMessageOnNewLine(list.joiWith(System.lineSeparator()));
         }else{
